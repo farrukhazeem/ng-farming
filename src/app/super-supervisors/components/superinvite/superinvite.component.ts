@@ -26,20 +26,10 @@ declare let $;
   styleUrls: ['./superinvite.component.css']
 })
 export class SuperinviteComponent implements OnInit {
-  demoArray = [
-   
-   {supervisor: 'James',growerName: 'Jake Jake', inviteID: '12312312', creationDate: '11/11/2011',
-    product_Name: 'Denhil', supply_date: '13/11/2011'
-    },
-   
-	];
-
+ 
   invites_rootForm: FormGroup;
   // invitesForm: FormGroup;
   
-
-
-
   fieldsDropDown = [{ "region_name": "" }];
   
   growersDropDown = [{ "farm_name": "" }];
@@ -48,9 +38,11 @@ export class SuperinviteComponent implements OnInit {
 
   Allproducts = [{ "product_name": "" }];
   
- supervisorselected: string;
+  regionDropDown=[];
 
- firstName;
+   supervisorselected: string;
+
+  firstName;
 
 	fieldId;
 	productId;
@@ -113,7 +105,7 @@ export class SuperinviteComponent implements OnInit {
 		}, () => {
       this.getFieldsApi();
       this.userApi();
-      this.concatfun();
+      // this.concatfun();
 
 		})
 }
@@ -121,12 +113,23 @@ export class SuperinviteComponent implements OnInit {
 
 apisupCall() {
   console.log('getSupervisorData');
-  this.cus.getSuperVisorUserForSuperSuperVisor().subscribe((data:any) => {
-    this.supervisorselected = data;
-    console.log(this.supervisorselected);
-    this.supervisorDropDown = [...this.supervisorDropDown, ...data.users];
-    console.log(this.supervisorDropDown);
-   });
+ 
+   this.cus.getSuperVisorUser("supervisor")
+   .then((data: Observable<any>) => {
+     data.subscribe(data => {
+       this.supervisorselected= data;
+
+       console.log(this.supervisorselected);
+
+      //  this.tableUserData = data['users'];
+
+      this.supervisorDropDown = [...this.supervisorDropDown, ...data.users];
+       console.log(this.supervisorDropDown);
+
+     })
+   }, (error) => {
+     console.log(error)
+   })
 
   
 }
@@ -183,40 +186,11 @@ supervisorID;
 
 
 
-concatfun(){
-  let concatarray= [...this.supervisorDropDown,...this.growersDropDown];
-  console.log(concatarray);
-}
+// concatfun(){
+//   let concatarray= [...this.supervisorDropDown,...this.growersDropDown];
+//   console.log(concatarray);
+// }
 
-
-/*onChange(value) {
-  console.log("VALUE: ", value)
-  this.growerID = value;
-  this.invites_rootForm.patchValue({
-    id: this.filterGrowerData[value]['_id']
-  })
-  
-  this.allTabData(this.growersDropDown[value]['_id'])
-  this.fieldService.getFieldById(this.filterGrowerData[value]['_id']).subscribe((data) => {
-    console.log('on change event of GROWER')
-    console.log(data);
-
-    this.growerfieldsDropDown = [...this.growerfieldsDropDown, ...data['data']];
-  }, (error) => {
-    console.log(error);
-  })
-
-  this.cs.getContractByGrowerId(this.filterGrowerData[value]['_id']).subscribe(data => {
-    console.log("Grower Contracts", data);
-    this.growerContracts = data['data'];
-  }, (error) => {
-    console.log(error);
-  }, () => {
-    this.validateContract();
-  })
-
-  this.supervisorID = value;
-} */
 
 onChange(event) {
  
@@ -246,7 +220,6 @@ onChange(event) {
     this.validateContract();
   })
 
-  // this.supervisorID = value;
 }
 
 onChangeSupervisor(event) {
@@ -348,20 +321,7 @@ userApi() {
 
 }
 
-allSupervisorData = []
-// supervisorApi(){
-//   this.cus.getSuperVisorUserForSuperSuperVisor()
-//   .then((data:Observable<any>) =>{
-//     data.subscribe(data => {
-//       console.log("all supervisor data", data);
-//       this.filterSupervisor();
 
-//     })
-//   }, (error) =>{
-//     console.log(error)
-  
-//   })
-// }
 
 filterGrowerData = [];
 
@@ -630,7 +590,8 @@ createInvite() {
   
       this.is.getInvitesData().subscribe(data => {
         this.allTabTableData = data['data'];
-        // console.log(this.allTabTableData);
+        
+        console.log(this.allTabTableData);
   
         for (let i = 0; i < this.allTabTableData.length; ++i) {
           for (let j = 0; j < this.filterGrowerData.length; ++j) {
@@ -639,7 +600,7 @@ createInvite() {
             }
           }
         }
-        // console.log(this.filterAllTabTableData);
+        console.log(this.filterAllTabTableData);
   
   
         for (let i = 0; i < this.filterAllTabTableData.length; ++i) {
