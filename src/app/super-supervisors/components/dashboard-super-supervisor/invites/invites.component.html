@@ -1,0 +1,202 @@
+<div class="container">
+
+	<!-- <app-loader *ngIf="showLoader"></app-loader> -->
+	<h2 style="text-align:center">Invites</h2>
+	<div class="positioning">
+		<form [formGroup]="invites_rootForm">
+			<div class="set-float rtl-right btn-group">
+				<span class="set-margin">Grower:</span>
+				<select formControlName="selectGrower" name="select" required class="form-control" (change)="onChange($event.target.value)">
+					<option *ngFor="let gw of filterGrowerData; let i = index" [value]="i">{{gw.first_name}}</option>
+				</select>
+			</div>
+			<div class="grower-id" style="position: relative;float: left;display: flex;" class="rtl-right form-group row">
+				<label for="inputPassword" class="col-sm-2 col-md-4 col-form-label">Grower ID:</label>
+				<div class="col-sm-10 col-md-7">
+					<input formControlName="id" type="text" class="form-control" placeholder="ID">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="rtl-right panel with-nav-tabs panel-default">
+		<div class="panel-heading">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" href="#tab1default" data-toggle="tab" aria-controls="home" aria-selected="true">All</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#tab2default" data-toggle="tab" aria-controls="home" aria-selected="true">Add</a>
+				</li>
+			</ul>
+		</div>
+		<div class="panel-body">
+			<div class="tab-content">
+				<div style="margin-top:20px" class="tab-pane fade show active" id="tab1default">
+					<div class="sub-search">
+						<span class="inner-addon left-addon col-10">
+							<i style="left:-10px" class="fas fa-search setPosition"></i>
+							<input [(ngModel)]="searchQuery" class="search-input form-control" placeholder="Search" type="search" id="example-search-input">
+						</span>
+					</div>
+					<table class="top-margin table table-hover tableBodyScroll">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Invite Number</th>
+								<th scope="col">Creation Date</th>
+								<th scope="col">Grower Name</th>
+								<th scope="col">Go</th>
+							</tr>
+						</thead>
+						<tbody class="abc">
+							<tr *ngFor="let td of filterAllTabTableData| search:searchQuery; let i = index" data-toggle="modal" data-target="#exampleModal" (click)="showDetailData(td, i)">
+								<td> {{td._id}}</td>
+								<td>{{td.open_date}}</td>
+								<td>{{td.grower_id}}</td>
+								<td>
+									<button type="button" class="btn btn-primary">Go</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade show" id="tab2default">
+					<form class="form-margin" [formGroup]="invitesForm">
+						<div class="row">
+							<div class="col-md-3 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Product:</span>
+								<select formControlName="product_id" name="select" required class="form-control" (change)="onProdChange($event.target.value)">
+									<option *ngFor="let pd of showProductDropDown; let i = index" [value]="pd['_id']">{{pd.product_name}}</option>
+								</select>
+							</div>
+							<div class="col-md-2 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Field Name:</span>
+								<select formControlName="field_id" name="select" required class="form-control" (change)="onFieldChange($event.target.value)">
+									<option *ngFor="let fd of growerfieldsDropDown; let i = index" [value]="i">{{fd.field_name}}</option>
+								</select>
+							</div>
+							<div class="col-md-3 rtl-right set-float form-group row">
+								<label class="col-md-3 col-form-label" for="inputPassword">Size:</label>
+								<div class="col-sm-10 col-md-7">
+									<input formControlName="size" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="col-md-3 rtl-right set-float form-group row">
+								<label class="col-md-5 col-form-label" for="inputPassword">Amount Left:</label>
+								<div class="col-sm-10 col-md-7">
+									<input formControlName="approved_quantity" class="form-control" type="text">
+								</div>
+							</div>	
+						</div>
+						<div class="row">
+							<div class="col-md-5 rtl-right set-float form-group row">
+								<label style="margin-left: 20px;margin-right: 30px;" class="col-form-label" for="inputPassword">Amount:</label>
+								<div class="">
+									<input formControlName="requested_quantity" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 date-picker" style="display:  flex;">
+								<label for="dateofbirth">Supply Date:</label>
+								<input formControlName="supply_date" id="dateofbirth12" name="dateofbirth" style="height:  40px;" type="date">
+							</div>					
+						</div>
+						<div>
+							<button type="button" class="add-button btn btn-primary" (click)="tableData()">Add</button>
+						</div>
+						</form>
+					<table class="top-margin table table-hover">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Supply Date</th>
+								<th scope="col">Field Name</th>
+								<th scope="col">Size</th>
+								<th scope="col">Product</th>
+								<th scope="col">Amount</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let i of displayTempInvitesTable; let ind = index">
+								<td>{{i.supply_date}}</td>
+								<td>{{i.field_name}}</td>
+								<td>{{i.size}}</td>
+								<td>{{i.product_name}}</td>
+								<td>{{i.requested_quantity}}</td>
+								<td>
+									<button type="button" class="btn btn-danger" (click)="deleteTempData(ind)">Del</button>
+
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<form [formGroup]="generalForm" class="rtl-right form-group row">
+						<div style="display:flex" class="col-md-10">
+							<label for="inputPassword" class="col-md-2 col-form-label">General Notes:</label>
+							<div class="col-sm-10 col-md-7">
+								<input formControlName="generalNotes" type="text" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-primary" (click)="createInvite()">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+
+						<table class="table table-hover">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Supply Date</th>
+									<th scope="col">Field Name</th>
+									<th scope="col">Size</th>
+									<th scope="col">Product</th>
+									<th scope="col">Amount</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let i of modelData; let ind = index">
+									<td>{{i.supply_date}}</td>
+									<td>{{i.field_name}}</td>
+									<td>{{i.size}}</td>
+									<td>{{i.product_name}}</td>
+									<td>{{i.requested_quantity}}</td>
+									<td>
+										<button type="button" class="btn btn-danger" (click)="removeModelData(i, ind)">Del</button>
+
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteCompleteInvite()">Delete Complete Invite</button>
+						<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>

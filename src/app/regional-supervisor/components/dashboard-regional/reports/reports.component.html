@@ -1,0 +1,216 @@
+<div class="container">
+	<!-- <app-loader *ngIf="showLoader"></app-loader> -->
+	<h2 style="text-align:center">Reports</h2>
+	<div class="positioning">
+		<form [formGroup]="reoprtsForm">
+			<div class="set-float rtl-right btn-group">
+				<span class="set-margin">Grower:</span>
+				<select formControlName="selectOption" name="select" required class="form-control" (change)="onChange($event.target.value)">
+					<option *ngFor="let gw of growersDropDown; let i = index" [value]="i">{{gw.first_name}}</option>
+
+				</select>
+			</div>
+			<div class="grower-id" style="position: relative;float: left;display: flex;" class="rtl-right form-group row">
+				<label for="inputPassword" class="col-sm-2 col-md-4 col-form-label">Grower ID:</label>
+				<div class="col-sm-10 col-md-7">
+					<input formControlName="id" type="text" class="form-control" placeholder="ID">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="rtl-right panel with-nav-tabs panel-default">
+		<div class="panel-heading">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" href="#tab1default" data-toggle="tab" aria-controls="home" aria-selected="true">All</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#tab2default" data-toggle="tab" aria-controls="home" aria-selected="true">Add</a>
+				</li>
+			</ul>
+		</div>
+		<div class="panel-body">
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="tab1default">
+					<div class="sub-search">
+						<span class="inner-addon left-addon col-10">
+							<i style="left:-10px" class="fas fa-search setPosition"></i>
+							<input [(ngModel)]="searchQuery" class="search-input form-control" placeholder="Search" type="search" id="example-search-input">
+						</span>
+					</div>
+
+					<table class="top-margin table table-hover tableBodyScroll">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Grower Name</th>
+								<th scope="col">Report Number</th>
+								<th scope="col">Creation Date</th>
+								<th scope="col">Go</th>
+							</tr>
+						</thead>
+						<tbody class="abc">
+							<tr *ngFor="let rg of displayAllReports | search:searchQuery" data-toggle="modal" data-target="#exampleModal" (click)="showDetailData(rg)">
+								<td>{{rg.grower_id}}</td>
+								<td>{{rg.reports}}</td>
+								<td>{{rg.creation_date}}</td>
+								<td><button type="button" class="btn btn-primary">Go</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" style="margin-top:25px" id="tab2default">
+					<form [formGroup]="reportsForm_add" action="">
+						<div class="row">
+							<div class="col-md-2 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Field Name:</span>
+								<!-- (change)="onFieldChange($event.target.value)" -->
+								<select formControlName="field_id" name="select" required class="form-control" >
+									<option *ngFor="let fd of fieldsDropDown; let i = index" [value]="fd._id">{{fd.field_name}}</option>
+				
+								</select>
+							</div>
+							<div class="col-md-3 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Bug Type:</span>
+								<select formControlName="bug_id" name="select" required class="form-control">
+										<option *ngFor="let bg of bugsDropDown; let i = index" [value]="bg._id">{{bg.bug_name}}</option>
+								</select>
+							</div>
+							<div class="col-md-3 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Bug Level:</span>
+								<select formControlName="infection_level" name="select" required class="form-control">
+									<option selected value="נמוכה מאוד">נמוכה מאוד</option>
+									<option value="נמוכה בינונית">נמוכה בינונית</option>
+									<option value="בינונית">בינונית</option>
+									<option value="בינונית גבוהה">בינונית גבוהה</option>
+									<option value="גבוהה">גבוהה</option>
+								</select>
+							</div>
+							<div class="col-md-4 col-sm-3 set-float rtl-right btn-group">
+								<span class="set-margin">Product Stabilization:</span>
+								<select formControlName="product_stabilization" name="select"  class="form-control">
+									<option selected value="ללא מועילים">ללא מועילים</option>
+									<option value="תבהליך התבוססות">תהליך התבוססות</option>
+									<option value="תחילת התבוססות">תחילת התבוססותית</option>
+									<option value="התבססות בינונית">התבוססות בינונית</option>
+									<option value="התבוססות טובה">התבוססות טובה</option>
+								</select>
+							</div>
+						</div>
+						<div class="report-inputs">
+							<div class="rtl-right form-group row" style="width:50%">
+								<label for="inputPassword" class="col-md-5 col-form-label">Recommendations:</label>
+								<div class="col-sm-10 col-md-7">
+									<input formControlName="recommendations" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="rtl-right form-group row" style="width:50%;margin-right: 20px;">
+								<label for="inputPassword" class="col-sm-3 col-md-3 col-form-label">Notes:</label>
+								<div class="col-sm-10 col-md-7">
+									<input formControlName="notes" type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+					</form>
+					<div>
+						<button type="button" class="add-button btn btn-primary" (click)="addTempData()" [disabled]="!reportsForm_add.valid">Add</button>
+					</div>
+					<table class="table set-table-margin">
+						<thead>
+							<tr>
+								<th scope="col">Field</th>
+								<th scope="col"> Bug Type</th>
+								<th scope="col">Bug Level</th>
+								<th scope="col">Stabilization</th>
+								<th scope="col">Recommendation</th>
+								<th scope="col">Notes</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let dd of this.displayTempData; let i = index">
+								<td>{{dd.field_name}}</td>
+								<td>{{dd.bug_idName}}</td>
+								<td>{{dd.infection_level}}</td>
+								<td>{{dd.product_stabilization}}</td>
+								<td>{{dd.recommendations}}</td>
+								<td>{{dd.notes}}</td>
+								<td>
+									<button type="button" class="btn btn-danger" (click)="deleteTempData(i)">Del</button>
+
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<form [formGroup]="generalForm" class="rtl-right form-group row">
+						<div style="display:flex" class="col-md-10">
+							<label for="inputPassword" class="col-md-2 col-form-label">General Notes:</label>
+							<div class="col-sm-10 col-md-7">
+								<input formControlName="general" type="text" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-primary" (click)="createReports()">Submit</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+
+					<table class="table table-hover">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Delete</th>
+								<th scope="col">Notes</th>
+								<th scope="col">Recommendation</th>
+								<th scope="col">Stabilization</th>
+								<th scope="col">Bug Level</th>
+								<th scope="col">Bug Type</th>
+								<th scope="col">Field</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let dd of modelData; let i = index">
+								<td>
+									<button type="button" class="btn btn-danger" (click)="removeModelData(i, dd)">Del</button>
+
+								</td>
+								<td>{{dd.notes}}</td>
+								<td>{{dd.recommendations}}</td>
+								<td>{{dd.product_stabilization}}</td>
+								<td>{{dd.infection_level}}</td>
+								<td>{{dd.bugName}}</td>
+								<td>{{dd.field_name}}</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteCompleteReport()">Delete Complete Report</button>
+					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>

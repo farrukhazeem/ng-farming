@@ -1,0 +1,82 @@
+<!-- <div class="rtl-right row">
+	<form [formGroup]="createContractForm" class="col-md-6">
+		<h2>Add:</h2>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group row">
+					<label for="inputPassword" class="col-sm-2 col-md-5 col-form-label">Grower</label>
+					<div class="col-sm-10 col-md-7">
+						
+						<select formControlName="grower_id" name="select" required class="form-control">
+							<option *ngFor="let pd of growerDropDown" [value]="pd._id">{{pd.first_name}}</option>
+
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword" class="col-sm-2 col-md-5 col-form-label">Product</label>
+					<div class="col-sm-10 col-md-7">
+						
+						<select formControlName="product_id" name="select" required class="form-control">
+							<option *ngFor="let pd of productDropDown" [value]="pd._id">{{pd.product_name}}</option>
+
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword" class="col-sm-2 col-md-5 col-form-label">Amount</label>
+					<div class="col-sm-10 col-md-7">
+						<input type="number" class="form-control" formControlName="amount" placeholder="Amount">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword" class="col-sm-2 col-md-5 col-form-label">Start Date</label>
+					<div class="col-sm-10 col-md-7">
+						<input type="date" class="form-control" formControlName="start_date" placeholder="Start Date">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="inputPassword" class="col-sm-2 col-md-5 col-form-label">End Date</label>
+					<div class="col-sm-10 col-md-7">
+						<input type="date" class="form-control" formControlName="end_date" placeholder="End Date">
+					</div>
+				</div>
+
+				<button type="button" class="btn btn-primary" (click)="createContract()">Submit</button>
+			</div>
+		</div>
+	</form>
+</div> -->
+
+
+<h2 style="text-align:center">Contract</h2>
+<div class="rtl-right sub-search">
+	<span class="inner-addon left-addon col-10">
+		<i style="left:-10px" class="fas fa-search setPosition"></i>
+		<input [(ngModel)]="searchQuery" class="search-input form-control" placeholder="Search" type="search" id="example-search-input">
+	</span>
+</div>
+<table class="rtl-right top-margin table table-hover tableBodyScroll">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Grower</th>
+			<th scope="col">Product</th>
+			<th scope="col">Amount</th>
+			<th scope="col">Startdate</th>
+			<th scope="col">enddate</th>
+		</tr>
+	</thead>
+	<tbody class="abc">
+		<tr *ngFor="let rg of displayTable | search:searchQuery">
+			<td>{{rg.grower_id}}</td>
+			<td>{{rg.product_id}}</td>
+			<td>{{rg.amount}}</td>
+			<td>{{rg.start_date}}</td>
+			<td>{{rg.end_date}}</td>
+		</tr>
+
+	</tbody>
+</table>

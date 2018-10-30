@@ -1,0 +1,199 @@
+<div class="rtl-right container">
+	<h2 style="text-align:center">Fields</h2>
+	<!-- <div class="rtl-right panel with-nav-tabs panel-default"> -->
+	<!-- <div class="panel-heading">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" href="#tab2default" data-toggle="tab" aria-controls="home" aria-selected="true">All</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#tab1default" data-toggle="tab" aria-controls="home" aria-selected="true">Add/Edit</a>
+				</li>
+			</ul>
+		</div> -->
+	<!-- <div class="panel-body"> -->
+	<!-- <div class="tab-content"> -->
+	<!-- Add/Edit tab content -->
+	<!-- <div class="tab-pane fade" id="tab1default"> -->
+	<div class="row">
+		<form [formGroup]="editFieldForm" class="rtl-right col-md-6">
+			<h2>Edit:</h2>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Field Name:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="text" class="form-control" formControlName="field_name" placeholder="field name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Field Size:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="field_size" placeholder="field size">
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 date-picker" style="display:  flex;margin-right:-15%">
+						<label for="dateofbirth">Plan Date:</label>
+						<input formControlName="seeding_date" id="dateofbirth12" name="dateofbirth" style="height:  40px;" type="date">
+					</div>
+					<div class="form-group row">
+						<label style="margin-left: 15%;" for="inputPassword" class="col-sm-2 col-form-label">Seeding Week:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="seeding_week" placeholder="seeding week">
+						</div>
+					</div>
+					<div class="rtl-right btn-group">
+						<span class="set-margin">Grower:</span>
+						<select formControlName="grower_id" name="select" required class="form-control">
+							<option *ngFor="let gw of filterGrowerData; let i = index" [value]="gw['_id']">{{gw.first_name}}</option>
+
+						</select>
+					</div>
+					<div style="margin-top : 10px" class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">City:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="text" class="form-control" formControlName="city" placeholder="city">
+						</div>
+					</div>
+					<div style="margin-top : 10px" class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Eshkol Number:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="eshkol_number" placeholder="Eshkol Number">
+						</div>
+					</div>
+				
+				</div>
+				<!-- [disabled]="createUserForm.status == 'INVALID'" -->
+			</div>
+			<button style="margin-top:20px" type="submit" class="btn btn-primary" [disabled]="editFieldForm.status == 'INVALID'" (click)="editField()">Edit</button>
+		</form>
+		<form [formGroup]="addFieldForm" class="rtl-right col-md-6">
+			<h2>Add:</h2>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Field Name:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="text" class="form-control" formControlName="field_name" placeholder="field name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Field Size:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="field_size" placeholder="field size">
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 date-picker" style="display:  flex;margin-right:-15%">
+						<label for="dateofbirth">Plan Date:</label>
+						<input formControlName="seeding_date" id="dateofbirth12" name="dateofbirth" style="height:  40px;" type="date">
+					</div>
+					<div class="form-group row">
+						<label style="margin-left: 15%;" for="inputPassword" class="col-sm-2 col-form-label">Seeding Week:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="seeding_week" placeholder="seeding week">
+						</div>
+					</div>
+					<div class="rtl-right btn-group">
+						<span class="set-margin">Grower:</span>
+						<select formControlName="grower_id" name="select" required class="form-control">
+							<option *ngFor="let gw of filterGrowerData; let i = index" [value]="i">{{gw.first_name}}</option>
+
+						</select>
+					</div>
+					<div style="margin-top : 10px" class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">City:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="text" class="form-control" formControlName="city" placeholder="city">
+						</div>
+					</div>
+					<div style="margin-top : 10px" class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Eshkol Number:</label>
+						<div class="col-sm-10 col-md-8">
+							<input type="number" class="form-control" formControlName="eshkol_number" placeholder="Eshkol Number">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<button style="margin-top:20px" type="submit" class="btn btn-primary" [disabled]="addFieldForm.status == 'INVALID'" (click)="createFields()">Add</button>
+		</form>
+		<div style="display:flex;width : 80%">
+			<span class="inner-addon left-addon col-10">
+				<i class="fas fa-search setPosition"></i>
+				<input [(ngModel)]="searchQuery" style="border-radius: 50px;" class="search-input form-control" placeholder="Search" type="search"
+				 id="example-search-input">
+			</span>
+		</div>
+		<table class="top-margin table table-hover tableBodyScroll">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Grower Name</th>
+					<th scope="col">Field Name</th>
+					<th scope="col">Eshkol Number</th>
+					
+					<th scope="col">Field Size</th>
+					<th scope="col">City</th>
+					<th scope="col">Plan Date</th>
+					<th scope="col">Plan Week</th>
+					<th scope="col">go</th>
+
+				</tr>
+			</thead>
+			<tbody class="abc">
+
+				<tr *ngFor="let fd of filterInviteData | search:searchQuery; let i = index" (click)="selectRow(fd, i)">
+					<td>{{fd.growerName}}</td>
+					<td>{{fd.field_name}}</td>
+					<td>{{fd.eshkol_number}}</td>
+					
+					<td>{{fd.field_size}}</td>
+					<td>{{fd.city}}</td>
+					<td>{{fd.seeding_date}}</td>
+					<td>{{fd.seeding_week}}</td>
+					<td><button type="button" class="btn btn-primary">Go</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- </div> -->
+
+	<!-- All tab content -->
+	<!-- <div class="tab-pane fade show active" id="tab2default">
+					<div class="rtl-right">
+						<div class="sub-search">
+							<span class="inner-addon left-addon col-10">
+								<i style="left:-10px" class="fas fa-search setPosition"></i>
+								<input [(ngModel)]="searchQuery" class="search-input form-control" placeholder="Search" type="search" id="example-search-input">
+							</span>
+						</div>
+						<table class="top-margin table table-hover">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Grower Name</th>
+									<th scope="col">Field Name</th>
+									<th scope="col">Field Size</th>
+									<th scope="col">City</th>
+									<th scope="col">Plan Date</th>
+									<th scope="col">Plan Week</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr *ngFor="let abc of demoArray | search:searchQuery">
+									<td>{{abc.growerName}}</td>
+									<td>{{abc.fieldName}}</td>
+									<td>{{abc.fieldSize}}</td>
+									<td>{{abc.city}}</td>
+									<td>{{abc.planDate}}</td>
+									<td>{{abc.planWeek}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div> -->
+	<!-- </div> -->
+	<!-- </div> -->
+	<!-- </div> -->
+</div>

@@ -1,0 +1,133 @@
+<div class="container-fluid">
+  
+    <div class="row" style="max-height: 100vh; margin: 0; overflow: hidden">
+      <div class="col s8 offset-m1 m7" style="overflow-x: hidden">
+  
+        <div class="container-fluid">
+  
+         
+  
+          <div class="row">
+           
+          </div>
+  
+          <div class="row z-depth-1">
+           
+            
+          
+  
+            <!-- Table Collapsible -->
+            <div id="table-collapsible" class="col s12">
+  
+              <collapsible-table class="z-depth-2"
+                [type]="collapsibleType"
+                [bordered]="bordered"
+                [borderedHorizontally]="borderedHorizontally"
+                [borderedVertically]="borderedVertically"
+                [striped]="striped"
+                [stripedOddColor]="stripedOddColor"
+                [stripedOddTextColor]="stripedOddTextColor"
+                [stripedEvenColor]="stripedEvenColor"
+                [stripedEvenTextColor]="stripedEvenTextColor"
+                [highlight]="highlight"
+                [highlightColor]="highlightColor"
+                [highlightTextColor]="highlightTextColor"
+                [activeColor]="activeColor"
+                [activeTextColor]="activeTextColor"
+                [centered]="centered"
+                [select]="select"
+                [selectMultipleRows]="selectMultipleRows"
+                [selectColor]="selectColor"
+                [selectTextColor]="selectTextColor"
+                [allowDeselectingRows]="allowDeselectingRows"
+                [allowKeyboardNavigation]="allowKeyboardNavigation"
+                [noTextSelect]="noTextSelect">
+  
+                <thead>
+                  <collapsible-table-row>
+                    <th *ngFor="let header of tableItems.header">
+                      {{ header.desc }}
+                    </th>
+                  </collapsible-table-row>
+                </thead>
+  
+                <tbody>
+                  <ng-container *ngFor="let data of tableItems.data">
+                    <!-- parameter 'to' links a row with it's detail -->
+                    <collapsible-table-row [detail]="detail">
+                      <td *ngFor="let td of data">
+                        {{ td }}
+                      </td>
+                    </collapsible-table-row>
+  
+                    <collapsible-table-row-detail #detail>
+                      <td width="75%">
+                        <p>{{ loremIpsumSmall }}</p>
+                      </td>
+                      <td>
+                        <p>{{ loremIpsumSmall }}</p>
+                      </td>
+                    </collapsible-table-row-detail>
+  
+                  </ng-container>
+                </tbody>
+  
+              </collapsible-table>
+  
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+      <div class="col s4 offset-m1 m3 options-col">
+        <ul class="collection with-header options">
+          <li class="collection-header">
+            <h5 class="hide-on-small-only">Options</h5>
+            <h6 class="hide-on-med-and-up">Options</h6>
+          </li>
+          <ng-container *ngIf="activeTab == 1">
+            <li class="warning">
+              <div>This screen is too small to show options</div>
+            </li>
+            <li *ngFor="let option of tableOptions"
+              class="collection-item"
+              [ngClass]="{ 'input': typeOf(option.title) !== 'boolean'}">
+              <!-- checkbox -->
+              <div *ngIf="typeOf(option.title) === 'boolean'" class="checkbox">
+                <input #checkbox
+                  type="checkbox"
+                  id="checkbox_{{ option.title }}"
+                  [(ngModel)]="option.checked"
+                  (change)="setOption(option.title, option.checked)"/>              
+                <label
+                  for="checkbox_{{ option.title }}"
+                  class="tooltipped"
+                  [attr.data-tooltip]="option.title"
+                  data-position="left">{{ option.title }}</label>
+              </div>
+              <!-- input field -->
+              <div *ngIf="typeOf(option.title) == 'string'" class="input">
+                <div class="input-field">
+                  <input
+                    #input
+                    type="text"
+                    id="input_{{ option.title }}"                
+                    [attr.value]="getOption(option.title)"
+                    [attr.disabled]="inputDisabled(option.title)"
+                    (keyup)="setOption(option.title, input.value)">
+                    <label
+                      for="input_{{ option.title }}"
+                      class="tooltipped"
+                      [attr.data-tooltip]="option.title"
+                      data-position="left">{{ option.title }}</label>
+                </div>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  
+  </div>

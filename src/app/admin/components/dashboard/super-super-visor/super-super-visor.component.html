@@ -1,0 +1,69 @@
+<!-- https://stackoverflow.com/questions/31393751/toggle-menu-from-right-instead-of-left -->
+    <div class="container">
+
+        <form [formGroup]="createUserForm" class="rtl-right">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">First Name</label>
+                <input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Phone Number</label>
+                <input type="number" class="form-control" placeholder="Phone Number" formControlName="phone">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">User Eskolnumber</label>
+                <input type="number" class="form-control" placeholder="Phone Number" formControlName="user_eskolnumber">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="createUser()" [disabled]="createUserForm.status == 'INVALID'">Add User</button>
+        </form>
+
+        <!-- <button (click)="createUser()">user</button>
+        <button (click)="securedPing()">securedPing</button> -->
+
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Eskolnumber</th>
+                        <th>Phone</th>
+                        <th>Lastname</th>
+                        <th>Firstname</th>
+                        
+                        <th>Email</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of tableUserData; let ind = index">
+                        <td>{{i.user_eskolnumber}}</td>
+                        <td>{{i.Phone_Number}}</td>
+                        <td>{{i.Last_Name}}</td>
+                        <td>{{i.First_Name}}</td>
+                                          
+                        <td>{{i.email}}</td>
+                        <td>{{ind+1}}</td>
+                        
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <!-- https://auth-ng6-start.auth0.com/api/v2/users -->

@@ -1,0 +1,49 @@
+<div class="container">
+	<h1 class="center-content">Bugs</h1>
+	<div class="rtl-right">
+		<h2>Add:</h2>
+		<form [formGroup]="createBugForm">
+			<div class="form-group row setWidth">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Bug Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" formControlName="bug_name" />
+				</div>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary" (click)="createBug()">Add</button>
+			</div>
+		</form>
+		<h2>Edit:</h2>
+		<form [formGroup]="editBugForm">
+			<div class="form-group row setWidth">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Bug Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" formControlName="bug_name" />
+				</div>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary" (click)="editBug()">Edit</button>
+			</div>
+		</form>
+		<div style="display:flex;width : 80%">
+			<span class="inner-addon left-addon col-10">
+				<i class="fas fa-search setPosition" style="left:-10px"></i>
+				<input [(ngModel)]="searchQuery" style="border-radius: 50px;padding-left:20px;padding-right: 30px" class="form-control" placeholder="Search"
+				 type="search" id="example-search-input">
+			</span>
+		</div>
+		<!-- table -->
+		<table class="rtl-right table setMargin setTableWidth tableBodyScroll">
+			<thead>
+				<tr>
+					<th scope="col">Bug Name</th>
+				</tr>
+			</thead>
+			<tbody class="abc">
+				<tr *ngFor="let i of bugList | search:searchQuery; let ind = index">
+					<td (click)="fillEditForm(ind)">{{i.bug_name}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

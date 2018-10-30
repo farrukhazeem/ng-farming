@@ -1,0 +1,155 @@
+
+.page-title {
+    text-align: center;
+  }
+  
+  #simple-collapsible,
+  #table-collapsible {
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 600px) {
+    #simple-collapsible,
+    #table-collapsible {
+      max-height: 50vh;
+    }
+  }
+  
+  @media screen and (min-width: 601px) {
+    #simple-collapsible,
+    #table-collapsible {
+      max-height: 60vh;
+    }
+  }
+  
+  .options-col {
+    padding: 0;
+    overflow: auto;
+    max-height: 100vh;
+  }
+  
+  .collection.options {
+    margin: 0;
+    background: rgba(0, 0, 0, 0.05);
+    border-top: none;
+    border-right: none;
+  }
+  
+  .collection.options > .warning {
+    display: none;
+  }
+  
+  .collection.options > .warning > * {
+    transform: rotate(-90deg) translateX(-50vh);
+    white-space: nowrap;
+  }
+  
+  @media screen and (max-width: 320px) {
+    .collection.options > .collection-item {
+      display: none;
+    }
+  
+    .collection.options > .warning {
+      display: block;
+      height: 100vh;
+    }
+  }
+  
+  .collection.options > .collection-item {
+    background: transparent;
+  }
+  
+  .collection.options > .collection-item:not(.input) {
+    padding: 0.5rem 1rem;
+  }
+  
+  .collection.options > .collection-item.input {
+    padding: 0.3rem 1rem;
+  }
+  
+  .collection.options > .collection-item .checkbox label {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .collection.options > .collection-item .input input {
+    margin: 0;
+  }
+  
+.collapsible-list-item{
+    display: inline-block;
+    width: 100%;
+}
+
+.tbody{
+   
+    /* display: inline-block; */
+}
+
+
+
+
+
+
+ /*old */
+.center-text{
+
+    text-align:center;
+}
+
+.r2 {
+    /* background-color: rgb(159, 187, 204); */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 15px;
+  }
+
+  .btn-size{
+    width: 80px;
+  }
+
+.height1{
+    width: 100%;
+    height: 30vh;
+
+  margin: 0 auto;
+
+}
+
+td, th {
+    border: 1px solid #57BB57;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.r1{
+    /* background-color: rgb(218, 203, 192); */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    
+}
+
+.submit-btn{
+    margin-top: 8px;
+}
+
+
+
+.button-block{
+    
+      display: flex;
+    }
+
+.regional-bg{
+    
+      /* background-color:lightblue; */
+    }
+    
+  

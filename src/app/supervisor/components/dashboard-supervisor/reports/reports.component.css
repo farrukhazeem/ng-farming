@@ -1,0 +1,72 @@
+.positioning {
+	margin-top: 25px;
+	display: flow-root;
+}
+
+.add-button {
+	float: left;
+	width: 10%;
+}
+
+.grower-id {
+	position: relative;
+	float: left;
+	display: flex;
+}
+
+.report-inputs {
+	display: flex;
+	margin-top: 30px
+}
+
+.set-float {
+	float: left;
+}
+
+.set-margin {
+	margin-left: 10px;
+}
+
+.set-table-margin {
+	margin-top: 60px;
+}
+
+.search-input {
+	border-radius: 50px;
+	padding-right: 30px
+}
+
+.sub-search {
+	display: flex;
+	width: 80%;
+}
+
+.top-margin {
+	margin-top: 20px;
+}
+
+
+.tableBodyScroll tbody {
+	display: block;
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.tableBodyScroll thead, .abc tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+
+.modal-content {
+	width: 150%;
+}
+
+
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}

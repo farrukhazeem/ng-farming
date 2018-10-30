@@ -1,0 +1,91 @@
+.positioning {
+	margin-top: 25px;
+	display: flow-root;
+}
+
+.set-float {
+	float: left;
+}
+
+.set-margin {
+	margin-left: 10px;
+}
+
+.add-button {
+	float: left;
+	width: 10%;
+}
+
+.top-margin {
+	margin-top: 60px;
+}
+
+.search-input {
+	border-radius: 50px;
+	padding-right: 30px
+}
+
+.form-margin {
+	margin-top: 20px;
+}
+
+/* for date picker */
+
+[type="date"] {
+	background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+	opacity: 0;
+}
+
+/* custom styles */
+
+body {
+	padding: 4em;
+	background: #e5e5e5;
+	font: 13px/1.4 Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+.date-picker label {
+	display: block;
+}
+
+.date-picker input {
+	border: 1px solid #c4c4c4;
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 3px 5px;
+	box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+	width: 190px;
+}
+
+.tableBodyScroll tbody {
+	display: block;
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.tableBodyScroll thead, .abc tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.test td {
+	position: relative;
+	float: left;
+}
+
+.modal-footer {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	-ms-flex-pack: end;
+	padding: 1rem;
+	border-top: 1px solid #e9ecef;
+}
