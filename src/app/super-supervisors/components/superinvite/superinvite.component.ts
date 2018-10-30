@@ -480,7 +480,7 @@ calculateAmountLeft(selectedFieldSize) {
 
 productObj;
 onProdChange(value) {
-  this.productObj = this.productsDropDown.find(x => x['_id'] === value)
+  this.productObj = this.Allproducts.find(x => x['_id'] === value)
   this.invites_rootForm .patchValue({
     requested_quantity: '0'
   })
